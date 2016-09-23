@@ -5,6 +5,7 @@ defmodule ListingUsers.UserControllerTest do
 
   @opts Router.init([])
   test 'listing users' do
+    # task1 = %User{name: "Yafa", task: "Eat brunch", date: "|2016-09-08 "}
     conn = conn(:get, "/users")
     response = Router.call(conn, @opts)
     assert response.status == 200
