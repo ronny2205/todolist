@@ -5,7 +5,8 @@ defmodule Todolist.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", Todolist do
+  scope "/", Todolist do
     pipe_through :api
+    get "/users", UserController, :index
   end
 end

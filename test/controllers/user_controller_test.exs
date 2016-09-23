@@ -8,5 +8,6 @@ defmodule ListingUsers.UserControllerTest do
     conn = conn(:get, "/users")
     response = Router.call(conn, @opts)
     assert response.status == 200
+    assert response.resp_body == "[]"
   end
 end
