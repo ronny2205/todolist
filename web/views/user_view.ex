@@ -3,5 +3,7 @@ defmodule Todolist.UserView do
 
   def render("index.json", %{users: users}) do
     users
+    
+  
   end
 end
