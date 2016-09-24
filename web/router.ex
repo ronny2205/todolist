@@ -8,5 +8,6 @@ defmodule Todolist.Router do
   scope "/", Todolist do
     pipe_through :api
     get "/users", UserController, :index
+    get "/tasks", TaskController, :index
   end
 end
