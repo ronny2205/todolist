@@ -9,6 +9,6 @@ defmodule ListingUsers.UserControllerTest do
     conn = conn(:get, "/users")
     response = Router.call(conn, @opts)
     assert response.status == 200
-    assert response.resp_body == "[]"
+    assert response.resp_body == "[{\"name\":\"alice\"},{\"name\":\"bob\"},{\"name\":\"claire\"}]"
   end
 end
