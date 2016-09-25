@@ -3,7 +3,5 @@ defmodule Todolist.TaskView do
 
   def render("index.json", %{tasks: tasks}) do
     tasks
-    
-  
   end
 end
