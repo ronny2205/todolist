@@ -64,7 +64,7 @@ defmodule Todolist.TaskController do
   def find_tasks_for_user(line, user_name) do
     [name, task, date] = String.split line, "|"
     # if user_name == name, do: %{task: task}
-    if user_name == name do
+    if String.downcase(user_name) == String.downcase(name) do 
       %{task: task}
     else
       ""
@@ -73,7 +73,7 @@ defmodule Todolist.TaskController do
   
   def find_tasks_user_date(line, user_name, given_date) do
     [name, task, date] = String.split line, "|"
-    if user_name == name and given_date == date do
+    if String.downcase(user_name) == String.downcase(name) and given_date == date do
       %{task: task}
     else
       ""

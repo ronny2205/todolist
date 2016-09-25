@@ -20,7 +20,7 @@ defmodule ListingTasks.TaskControllerTest do
   end
   
   test 'listing tasks for user' do
-    conn = conn(:get, "/tasks", %{"name" => "bob"})
+    conn = conn(:get, "/tasks", %{"name" => "Bob"})
     response = Router.call(conn, @opts)
     assert response.status == 200
     assert response.resp_body == "[{\"task\":\"Call mom\"},{\"task\":\"Do laundry\"}]"
@@ -41,7 +41,7 @@ defmodule ListingTasks.TaskControllerTest do
   end
   
   test 'listing tasks for user and date2' do
-    conn = conn(:get, "/tasks/date", %{"name" => "claire", "date" => "2016-09-11"})
+    conn = conn(:get, "/tasks/date", %{"name" => "Claire", "date" => "2016-09-11"})
     response = Router.call(conn, @opts)
     assert response.status == 200
     assert response.resp_body == "[{\"task\":\"Call mom\"}]"
