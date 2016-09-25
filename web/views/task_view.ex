@@ -4,4 +4,8 @@ defmodule Todolist.TaskView do
   def render("index.json", %{tasks: tasks}) do
     tasks
   end
+  
+  def render("show.json", %{tasks: tasks}) do
+    tasks
+  end
 end

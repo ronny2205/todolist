@@ -9,5 +9,6 @@ defmodule Todolist.Router do
     pipe_through :api
     get "/users", UserController, :index
     get "/tasks", TaskController, :index
+    get "/tasks/date", TaskController, :show
   end
 end
