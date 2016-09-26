@@ -1,6 +1,11 @@
 defmodule Todolist do
   use Application
 
+  def main(_args) do
+    IO.gets("")
+    IO.puts "Hi"
+  end
+  
   # See http://elixir-lang.org/docs/stable/elixir/Application.html
   # for more information on OTP Applications
   def start(_type, _args) do
