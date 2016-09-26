@@ -1,37 +1,21 @@
 defmodule Todolist.TaskController do
   use Todolist.Web, :controller
     
-    def index(conn, %{"name" => name}) do
+  def index(conn, %{"name" => name}) do
+    {status, body} = File.read("web/static/assets/data.csv")
+    tasks = 
+      if status == :ok do
+        lines = String.split body, "\n"
+        tasks = Enum.map(lines, fn(line) -> find_tasks_for_user(line, name) end)
+        # remove the file title
+        tasks = List.delete_at(tasks, 0)
+        tasks = delete_all(tasks, "")
+      else
+        IO.puts "error reading: web/static/assets/data.csv"
+      end
+    render conn, tasks: tasks
+  end
     
-      {status, body} = File.read("web/static/assets/data.csv")
-      tasks = 
-        if status == :ok do
-          lines = String.split body, "\n"
-          tasks = Enum.map(lines, fn(line) -> find_tasks_for_user(line, name) end)
-          # remove the file title
-          tasks = List.delete_at(tasks, 0)
-          tasks = delete_all(tasks, "")
-        else
-          IO.puts "error reading: web/static/assets/data.csv"
-        end
-        
-      render conn, tasks: tasks
-    end
-    
-
-#   def index(conn, params) do
-#     x = scrub_params(conn, "name")
-#     y = scrub_params(conn, "date")
-#     render conn, tasks: []
-#      #render conn, tasks: [params["name"]]
-#      # render conn, name: params["name"]
-#   end
-  
-  
-#   def index(conn, %{"name" => name, "date" => date} = params) do
-#      render conn, tasks: []
-#     #  |> text("I see, #{name} is #{date} years old!")
-#   end
   def index(conn, _params) do
     conn
     |> put_status(400)
@@ -39,23 +23,22 @@ defmodule Todolist.TaskController do
   end
   
   
-   def show(conn, %{"name" => name, "date" => date}) do
-      {status, body} = File.read("web/static/assets/data.csv")
-      tasks = 
-        if status == :ok do
-          lines = String.split body, "\n"
-          tasks = Enum.map(lines, fn(line) -> find_tasks_user_date(line, name, date) end)
-          # remove the file title
-          tasks = List.delete_at(tasks, 0)
-          tasks = delete_all(tasks, "")
-        else
-          IO.puts "error reading: web/static/assets/data.csv"
-        end
-        
-        render conn, tasks: tasks
-    end
+  def show(conn, %{"name" => name, "date" => date}) do
+    {status, body} = File.read("web/static/assets/data.csv")
+    tasks = 
+      if status == :ok do
+        lines = String.split body, "\n"
+        tasks = Enum.map(lines, fn(line) -> find_tasks_user_date(line, name, date) end)
+        # remove the file title
+        tasks = List.delete_at(tasks, 0)
+        tasks = delete_all(tasks, "")
+      else
+        IO.puts "error reading: web/static/assets/data.csv"
+      end
+    render conn, tasks: tasks
+  end
     
-    def show(conn, _params) do
+  def show(conn, _params) do
     conn
     |> put_status(400)
     |> text("Error, wrong parameters supplied!")
@@ -63,7 +46,6 @@ defmodule Todolist.TaskController do
   
   def find_tasks_for_user(line, user_name) do
     [name, task, date] = String.split line, "|"
-    # if user_name == name, do: %{task: task}
     if String.downcase(user_name) == String.downcase(name) do 
       %{task: task}
     else

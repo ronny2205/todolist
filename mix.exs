@@ -5,6 +5,7 @@ defmodule Todolist.Mixfile do
     [app: :todolist,
      version: "0.0.1",
      elixir: "~> 1.2",
+     escript: [main_module: Todolist],
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
      build_embedded: Mix.env == :prod,
