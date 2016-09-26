@@ -1,19 +1,20 @@
 # Todolist
 
-To start your Phoenix app:
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
-  * Start Phoenix endpoint with `mix phoenix.server`
+A simple JSON REST style API that helps users manage tasks.
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+The API has two Endpoints - Users and Tasks.
 
-Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
+Send a get request to /users to recieve the list of all users:
+curl localhost:4000/users
 
-## Learn more
+Send a get request to /tasks with a user name param to recieve all the tasks for that user:
+curl localhost:4000/tasks\?name="bob"
 
-  * Official website: http://www.phoenixframework.org/
-  * Guides: http://phoenixframework.org/docs/overview
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+Send a get request to /tasks/date with user name and date params to recieve all the tasks for that user in that date:
+curl localhost:4000/tasks/date\?name="bob"\&date="2016-09-09"
+
+If there are less params than expected, you will recieve an error.
+If there are no matching taks, you will recieve an empty list.
+
+Run 'mix test' to run the unit tests.
