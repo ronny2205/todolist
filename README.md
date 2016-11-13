@@ -1,7 +1,7 @@
 # Todolist
 
 
-A simple JSON REST style API that helps users manage tasks.
+A simple JSON REST style API that helps users manage tasks, using elixir & phoenix. 
 
 The API has two Endpoints - Users and Tasks.
 
