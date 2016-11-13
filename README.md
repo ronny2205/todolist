@@ -1,4 +1,4 @@
-# Todolist
+# Todolist API (Elixir & Phoenix)
 
 
 A simple JSON REST style API that helps users manage tasks, using elixir & phoenix. 
